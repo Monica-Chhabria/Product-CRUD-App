@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    
+    xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:tx="http://www.springframework.org/schema/tx"
+      xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        https://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        <context:component-scan base-package="productcrudapp"></context:component-scan>
+        <tx:annotation-driven/>
+        <mvc:annotation-driven></mvc:annotation-driven>
+<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver" id= "vr">
+<property name="prefix" value= "/WEB-INF/views/"></property>
+<property name="suffix" value= ".jsp"></property>
+</bean>
+<bean id = "hibernateTemplate" class = "org.springframework.orm.hibernate5.HibernateTemplate">
+<property name="sessionFactory" >
+<ref bean="sessionFactory"></ref>
+</property>
+</bean> 
+<bean id = "sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+<property name = "annotatedClasses" >
+      <list>
+      <value>productcrudapp.model.Product</value>
+      </list>
+      </property>
+      <property name = "hibernateProperties" >
+     <props>
+ <!-- need to use hibernate -->
+ <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+ <prop key="hibernate.hbm2ddl.auto">update</prop>
+ <prop key="hibernate.show_sql">true</prop>
+ </props>
+ </property>
+<property name = "dataSource" ref= "ds" />
+
+</bean>
+<bean id = "ds" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+<property name="driverClassName" value = "com.mysql.jdbc.Driver"></property>
+<property name="username" value = "root"></property>
+
+<property name="password" value = "ilovesiki"></property>
+<property name="url" value="jdbc:mysql://localhost:3306/productcrud"></property>
+</bean>
+  <!-- declaring bean for hibernate transaction Manager for manager -->
+   <bean id = "transactionManager" class = "org.springframework.orm.hibernate5.HibernateTransactionManager">
+   
+      <property name = "sessionFactory" ref = "sessionFactory"></property>
+   </bean>
+  <bean id="themeSource" class="org.springframework.ui.context.support.ResourceBundleThemeSource">
+	<property name="basenamePrefix" value="theme-" />
+</bean>
+<bean id="themeResolver" class="org.springframework.web.servlet.theme.CookieThemeResolver">
+	<property name="defaultThemeName" value="wood" />
+</bean> 
+<bean id="themeChangeInterceptor" class="org.springframework.web.servlet.theme.ThemeChangeInterceptor">
+	<property name="paramName" value="theme" />
+</bean> 
+   <!--   <mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"></mvc:resources> -->
+ <mvc:interceptors>
+   <ref bean="themeChangeInterceptor"></ref>
+</mvc:interceptors> 
+ 
+ 
+<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/"></mvc:resources>
+<mvc:resources mapping="/update/resources/**" location="/WEB-INF/resources/"></mvc:resources>
+         </beans>
