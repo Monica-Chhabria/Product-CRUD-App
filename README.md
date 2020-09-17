@@ -3,4 +3,15 @@ This is an application in which user can add  , update , create , delete product
 
 ## Product -CRUD-App Home Page
 
-![GitHub Logo](https://github.com/Monica-Chhabria/Product-CRUD-App/tree/master/src/main/webapp/WEB-INF/resources/images/wood.jpg)
+<img src = "src/main/webapp/WEB-INF/resources/images/AddProduct.PNG">
+</img>
+## Product -CRUD-App Add Product Page
+
+<img src = "src/main/webapp/WEB-INF/resources/images/home page.PNG">
+</img>
+
+## Product -CRUD-App Modify Product Page
+
+<img src = "src/main/webapp/WEB-INF/resources/images/update product.PNG">
+</img>
+
