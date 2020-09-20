@@ -47,7 +47,7 @@
 <property name="driverClassName" value = "com.mysql.jdbc.Driver"></property>
 <property name="username" value = "root"></property>
 
-<property name="password" value = "ilovesiki"></property>
+<property name="password" value = "root"></property>
 <property name="url" value="jdbc:mysql://localhost:3306/productcrud"></property>
 </bean>
   <!-- declaring bean for hibernate transaction Manager for manager -->
